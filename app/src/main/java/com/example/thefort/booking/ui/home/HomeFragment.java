@@ -1,6 +1,7 @@
 package com.example.thefort.booking.ui.home;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +20,7 @@ import com.example.thefort.ui.IRecyclerViewClickHandler;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements IRecyclerViewClickHandler{
 
     private FragmentHomeBinding binding;
     TrainerAdapter trainerAdapter;
@@ -37,21 +38,21 @@ public class HomeFragment extends Fragment {
 
         binding.browseTrainerRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
 
+        ArrayList<TrainerObject> localDataSet = new ArrayList<>();
 
-        TrainerObject trainerObject = new TrainerObject(1,"hluuu","355","This the discription","logo.jpg");
+        for(int i = 0; i<5;i++){
+            TrainerObject trainerObject = new TrainerObject(i,"hluuu"+ i,"355","This the discription","logo.jpg");
 
+            localDataSet.add(trainerObject);
 
-         ArrayList<TrainerObject> localDataSet = new ArrayList<>();
-
-        localDataSet.add(trainerObject);
-        localDataSet.add(trainerObject);
-        localDataSet.add(trainerObject);
-        localDataSet.add(trainerObject);
-        localDataSet.add(trainerObject);
-        localDataSet.add(trainerObject);
+        }
 
 
-        trainerAdapter  = new TrainerAdapter(localDataSet,getContext(),iRecyclerViewClickHandler); // Create an instance of your adapter
+
+
+
+
+        trainerAdapter  = new TrainerAdapter(localDataSet,getContext(),HomeFragment.this); // Create an instance of your adapter
 
         binding.browseTrainerRecycler.setAdapter(trainerAdapter);
 //        recyclerView.setAdapter(adapter);
@@ -67,5 +68,12 @@ public class HomeFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+
+    @Override
+    public void onItemClick(int position) {
+
+        Log.d("CLICKED BUTTON", "onItemClick: ");
     }
 }

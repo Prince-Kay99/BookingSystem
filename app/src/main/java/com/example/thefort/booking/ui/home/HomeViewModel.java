@@ -16,7 +16,7 @@ public class HomeViewModel extends ViewModel {
 
 
         recyclerTrainer = new MutableLiveData<>();
-        mText.setValue("This is home fragment");
+
     }
 
 
