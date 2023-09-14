@@ -5,7 +5,7 @@
 
     <string name="next">Next</string>
     <string name="previous">Previous</string>
-    <string name="WCF_URL">BaseURL</string>
+    <string name="WCF_URL">https://fortapplication.azurewebsites.net</string>
 
     <!-- Server response status code-->
     <string name="response_success">200</string>

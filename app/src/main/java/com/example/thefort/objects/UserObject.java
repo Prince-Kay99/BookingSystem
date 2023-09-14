@@ -2,82 +2,82 @@ package com.example.thefort.objects;
 
 public class UserObject {
 
-    private int Id;
-    private String Name;
-    private String Surname;
-    private String Email;
-    private int PhoneNo;
-    private String Gender;
-    private String UserType;
+
+
+    private int id;
+    private String user_FirstName;
+    private String user_LastName;
+    private String user_Contact;
+    private String user_Email;
+    private String user_Password;
+    private String user_Type;
+
 
     public UserObject(){};
 
-    public UserObject(int Id, String Name, String Surname, String Email, int PhoneNo, String Gender, String UserType) {
-        this.Id = Id;
-        this.Name = Name;
-        this.Surname = Surname;
-        this.Email = Email;
-        this.PhoneNo = PhoneNo;
-        this.Gender = Gender;
-        this.UserType = UserType;
+    public UserObject(int id, String user_FirstName, String user_LastName, String user_Contact, String user_Email, String user_Password, String user_Type) {
+        this.id = id;
+        this.user_FirstName = user_FirstName;
+        this.user_LastName = user_LastName;
+        this.user_Contact = user_Contact;
+        this.user_Email = user_Email;
+        this.user_Password = user_Password;
+        this.user_Type = user_Type;
     }
 
     public int getId() {
-        return Id;
+        return id;
     }
 
     public void setId(int id) {
-        Id = id;
+        this.id = id;
     }
 
-    public String getName() {
-        return Name;
+    public String getUser_FirstName() {
+        return user_FirstName;
     }
 
-    public void setName(String name) {
-        Name = name;
+    public void setUser_FirstName(String user_FirstName) {
+        this.user_FirstName = user_FirstName;
     }
 
-    public String getSurname() {
-        return Surname;
+    public String getUser_LastName() {
+        return user_LastName;
     }
 
-    public void setSurname(String surname) {
-        Surname = surname;
+    public void setUser_LastName(String user_LastName) {
+        this.user_LastName = user_LastName;
     }
 
-    public String getEmail() {
-        return Email;
+    public String getUser_Contact() {
+        return user_Contact;
     }
 
-    public void setEmail(String email) {
-        Email = email;
+    public void setUser_Contact(String user_Contact) {
+        this.user_Contact = user_Contact;
     }
 
-    public int getPhoneNo() {
-        return PhoneNo;
+    public String getUser_Email() {
+        return user_Email;
     }
 
-    public void setPhoneNo(int phoneNo) {
-        PhoneNo = phoneNo;
+    public void setUser_Email(String user_Email) {
+        this.user_Email = user_Email;
     }
 
-    public String getGender() {
-        return Gender;
+    public String getUser_Password() {
+        return user_Password;
     }
 
-    public void setGender(String gender) {
-        Gender = gender;
+    public void setUser_Password(String user_Password) {
+        this.user_Password = user_Password;
     }
 
-    public String getUserType() {
-        return UserType;
+    public String getUser_Type() {
+        return user_Type;
     }
 
-    public void setUserType(String userType) {
-        UserType = userType;
+    public void setUser_Type(String user_Type) {
+        this.user_Type = user_Type;
     }
-
-
-
 }

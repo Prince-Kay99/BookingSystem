@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -51,7 +52,7 @@ public class RegisterFragment extends Fragment implements URLGenerator {
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        uiComponents = new UIComponents(getActivity());
         binding.btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -67,22 +68,18 @@ public class RegisterFragment extends Fragment implements URLGenerator {
                                 if (serverResponseCode != null) {
 
                                     switch(serverResponseCode){
-                                        case "200":
+                                        case "Registration successful.":
                                             Log.e("RESPONSE CODE 200: ", serverResponseCode);
                                             Snackbar.make(getActivity().findViewById(android.R.id.content),
                                                     "Successfully registered, please sign in", Snackbar.LENGTH_LONG).show();
                                             break;
 
-                                        case "201":
+                                        case "Error: Bad Request":
                                             uiComponents.alertDialog_DefaultNoCancel("Email already exist, please try another email", "Sign up Failed", "OK");
                                             binding.txtEmailEditor.setText("");
                                             binding.txtEmailEditor.requestFocus();
                                             binding.txtEmail.setError("Enter new email");
                                             binding.txtEmail.setErrorEnabled(true);
-                                            break;
-
-                                        case "202":
-                                            uiComponents.alertDialog_DefaultNoCancel("Internal server error, please try again", "Internal error", "Ok");
                                             break;
 
                                         default:
@@ -116,29 +113,31 @@ public class RegisterFragment extends Fragment implements URLGenerator {
     public void POSTRegisterRequest(final VolleyCallBack callBack) throws JSONException {
 
 
+
+
         JSONObject jsonBody = new JSONObject();
 
-        jsonBody.put("name", binding.txtFNameEditor.getText());
-        jsonBody.put("surname", binding.txtSurnameEditor.getText());
-        jsonBody.put("email", binding.txtEmailEditor.getText());
-        jsonBody.put("password", binding.txtPasswordEditor.getText());
-        jsonBody.put("cellNo",5555);
-        jsonBody.put("gender","male");
-        jsonBody.put("userType","customer");
+        jsonBody.put("user_FirstName", binding.txtFNameEditor.getText());
+        jsonBody.put("user_LastName", binding.txtSurnameEditor.getText());
+        jsonBody.put("user_Email", binding.txtEmailEditor.getText());
+        jsonBody.put("user_Password", binding.txtPasswordEditor.getText());
+        jsonBody.put("user_Contact","012356789");
+        jsonBody.put("user_Type","client");
         final String mRequestBody = jsonBody.toString();
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, generateURL(), new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 String jsonObj = response.toString();
-                if (jsonObj.contains("1")) {
+
+                Log.e("VOLLEYRESPONSE", "onResponse: "+response);
+
+                if (jsonObj.contains("Registration successful.")) {
                     serverResponseCode = getResources().getString(R.string.response_success);
-                }else if(jsonObj.contains("0")){
-                    serverResponseCode="201";
-                }else if(jsonObj.contains("-1")){
-                    serverResponseCode="202";
-                }else {
-                    serverResponseCode = getResources().getString(R.string.response_login_error);
+                    Toast.makeText(getContext(), "Successfully registered, you may login", Toast.LENGTH_SHORT).show();
+
+                } {
+                    serverResponseCode = response.toString();
                     Log.e("Inside response", "returned null object from server login");
                 }
 
@@ -188,7 +187,7 @@ public class RegisterFragment extends Fragment implements URLGenerator {
 
     @Override
     public String generateURL() {
-        return getResources().getString(R.string.WCF_URL)+"RegisterURI";
+        return getResources().getString(R.string.WCF_URL)+"/api/Users/Register/register";
     }
 
     @Override
