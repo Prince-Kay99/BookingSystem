@@ -1,11 +1,14 @@
 package com.example.thefort.objects;
 
-public class TrainerObject {
+import java.io.Serializable;
+
+public class TrainerObject implements Serializable {
     private int ID;
     private String Name;
     private String Price;
     private String Description;
     private String image;
+
 
     public TrainerObject() {
     }

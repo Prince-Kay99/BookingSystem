@@ -48,6 +48,7 @@ public class LoginFragment extends Fragment implements URLGenerator {
     UIComponents uiComponents;
     String serverResponseCode;
     UserObject userObject;
+    UserObject user;
     SharedPreferences userSharedPreferences;
 
 
@@ -100,7 +101,7 @@ public class LoginFragment extends Fragment implements URLGenerator {
 
                             if (serverResponseCode != null) {
                                 if (serverResponseCode.equals("200")) {
-                                   // createSharedPreferences();
+                                    createSharedPreferences();
                                     Log.e("RESPONSE CODE 200: ", serverResponseCode);
                                     Intent intent = new Intent(getActivity(), MainAppActivity.class);
                                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -152,6 +153,12 @@ public class LoginFragment extends Fragment implements URLGenerator {
         editor.putString("pref_Id",String.valueOf(userObject.getId()));
         editor.putString("pref_UserType",userObject.getUser_Type());
         editor.commit();
+
+        UserObject user = new UserObject();
+        user.setUser_Email(userObject.getUser_Email());
+        user.setUser_FirstName(userObject.getUser_FirstName());
+        user.setUser_LastName(userObject.getUser_LastName());
+        user.setUser_Password("passw");
     }
 
 
@@ -181,6 +188,12 @@ public class LoginFragment extends Fragment implements URLGenerator {
                 Log.e("VOLLEYRESPONSE", "onResponse: "+response);
 
                 if (jsonObj.contains("id") && jsonObj.contains("user_FirstName") ) {
+                    GsonBuilder builder = new GsonBuilder();
+                    builder.serializeNulls();
+                    Gson gson = builder.setPrettyPrinting().create();
+                    userObject = gson.fromJson(jsonObj, UserObject.class);
+                    Log.e("VOLLEYLOGGED", "logged user "+userObject.getUser_Email());
+
                     serverResponseCode = getResources().getString(R.string.response_success);
                 }else if(jsonObj.contains("0")){
                     serverResponseCode="201";
@@ -219,16 +232,7 @@ public class LoginFragment extends Fragment implements URLGenerator {
                 }
             }
 
-//            @Override
-//            protected Response<String> parseNetworkResponse(NetworkResponse response) {
-//                String responseString = "";
-//                if (response != null) {
-//                    responseString = String.valueOf(response);
-//                    Log.e("parseNetworkResponse",responseString);
-//
-//                }
-//                return Response.success(responseString, HttpHeaderParser.parseCacheHeaders(response));
-//            }
+
         };
 
 
@@ -243,36 +247,3 @@ public class LoginFragment extends Fragment implements URLGenerator {
 
 
 
-
-/*
-   String jsonObj = response.toString();
-
-                        if(!jsonObj.contains("def")){
-                            Log.e("Contains def obj",jsonObj.toString());
-                            if (jsonObj.contains("Id")) {
-                                GsonBuilder builder = new GsonBuilder();
-                                builder.serializeNulls();
-                                Gson gson = builder.setPrettyPrinting().create();
-                                userObject = gson.fromJson(jsonObj, UserObject.class);
-                                serverResponseCode = getResources().getString(R.string.response_success);
-                            }else{
-                                serverResponseCode =getResources().getString(R.string.response_login_error);
-                            }
-                        }else{
-                            serverResponseCode = getResources().getString(R.string.response_object_not_found);
-                        }
-                        callBack.OnSuccess();
-
-
-
-
-
-                             @Override
-                    public void onErrorResponse(VolleyError error) {
-                        String body = "";
-                        serverResponseCode = null;
-                        Log.e("Error response",error.toString());
-
-                        callBack.OnSuccess();
-                    }
- */

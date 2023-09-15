@@ -9,20 +9,6 @@ app:layout_constraintVertical_bias=".3"
 tools:context=".booking.ui.dashboard.DashboardFragment">
 
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:adjustViewBounds="true"
-        android:scaleType="fitXY"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent=".28"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logo" />
-
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout2"
         android:layout_width="match_parent"
@@ -31,11 +17,11 @@ tools:context=".booking.ui.dashboard.DashboardFragment">
         android:elevation="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent=".78"
+        app:layout_constraintHeight_percent=".72"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" >
+        app:layout_constraintVertical_bias="1.0">
 
         <TextView
             android:id="@+id/textView7"
@@ -83,22 +69,22 @@ tools:context=".booking.ui.dashboard.DashboardFragment">
             app:layout_constraintTop_toBottomOf="@+id/txtBookTime" />
 
         <TextView
-            android:id="@+id/textView11"
+            android:id="@+id/txtBookPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Name and surname"
+            android:text="R30"
             app:layout_constraintStart_toStartOf="@+id/txtBookDate"
             app:layout_constraintTop_toBottomOf="@+id/txtBookDate" />
 
         <TextView
-            android:id="@+id/textView12"
+            android:id="@+id/txtBookDuration"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="60 mins"
-            app:layout_constraintStart_toStartOf="@+id/textView11"
-            app:layout_constraintTop_toBottomOf="@+id/textView11" />
+            app:layout_constraintStart_toStartOf="@+id/txtBookPrice"
+            app:layout_constraintTop_toBottomOf="@+id/txtBookPrice" />
 
         <View
             android:id="@+id/divider2"
@@ -108,7 +94,7 @@ tools:context=".booking.ui.dashboard.DashboardFragment">
             android:background="?android:attr/listDivider"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView12" />
+            app:layout_constraintTop_toBottomOf="@+id/txtBookDuration" />
 
         <ImageView
             android:id="@+id/imageView5"
@@ -121,7 +107,7 @@ tools:context=".booking.ui.dashboard.DashboardFragment">
             app:layout_constraintTop_toBottomOf="@+id/divider2" />
 
         <TextView
-            android:id="@+id/txtBookName3"
+            android:id="@+id/txtBookName2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
@@ -141,7 +127,7 @@ tools:context=".booking.ui.dashboard.DashboardFragment">
             android:textColor="@color/material_dynamic_neutral_variant60"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/imageView5"
-            app:layout_constraintStart_toStartOf="@+id/txtBookName3" />
+            app:layout_constraintStart_toStartOf="@+id/txtBookName2" />
 
         <ImageView
             android:id="@+id/imageView6"
@@ -207,7 +193,7 @@ tools:context=".booking.ui.dashboard.DashboardFragment">
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:text="RESERVE"
             app:layout_constraintEnd_toEndOf="parent"
@@ -215,6 +201,18 @@ tools:context=".booking.ui.dashboard.DashboardFragment">
             app:layout_constraintTop_toBottomOf="@+id/txtBookMail" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent=".34"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

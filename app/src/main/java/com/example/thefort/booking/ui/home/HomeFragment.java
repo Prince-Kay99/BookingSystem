@@ -1,5 +1,7 @@
 package com.example.thefort.booking.ui.home;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -8,14 +10,24 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.example.thefort.MainActivity;
+import com.example.thefort.R;
 import com.example.thefort.adapters.TrainerAdapter;
+import com.example.thefort.adapters.TrainerProfileAdapter;
+import com.example.thefort.booking.MainAppActivity;
 import com.example.thefort.databinding.FragmentHomeBinding;
 import com.example.thefort.objects.TrainerObject;
 import com.example.thefort.ui.IRecyclerViewClickHandler;
+import com.google.android.material.appbar.MaterialToolbar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +36,11 @@ public class HomeFragment extends Fragment implements IRecyclerViewClickHandler{
 
     private FragmentHomeBinding binding;
     TrainerAdapter trainerAdapter;
+    TrainerProfileAdapter trainerProfileAdapter;
+    SharedPreferences sharedPreferences;
     IRecyclerViewClickHandler iRecyclerViewClickHandler;
+    ArrayList<TrainerObject> localDataSet = new ArrayList<>();
+    ArrayList<TrainerObject> trainerProfileSet = new ArrayList<>();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -34,26 +50,44 @@ public class HomeFragment extends Fragment implements IRecyclerViewClickHandler{
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
+//        if (getActivity() instanceof MainAppActivity) {
+//            Toolbar toolbar = ((MainAppActivity) getActivity()).getToolbar();
+//
+//            // Now you can work with the Toolbar
+//            if (toolbar != null) {
+//                toolbar.setVisibility(View.GONE);
+//            }
+//        }
 
+//        toolbar.setVisibility(View.GONE);
+
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("userPref", Context.MODE_PRIVATE);
+        // SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        String name = sharedPreferences.getString("pref_FirstName", "")+ " " +sharedPreferences.getString("pref_LastName", "");
+        binding.txtHomeName.setText(name);
+        binding.txtHomeEmail.setText(sharedPreferences.getString("pref_Email", ""));
 
         binding.browseTrainerRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+        binding.allTrainersRecyclerView.setLayoutManager(layoutManager);
 
-        ArrayList<TrainerObject> localDataSet = new ArrayList<>();
+//        ArrayList<TrainerObject> localDataSet = new ArrayList<>();
+//        ArrayList<TrainerObject> trainerProfileSet = new ArrayList<>();
+        TrainerObject trainerObject = new TrainerObject(1,"hluuu","355","This the discription","logo.jpg");
 
         for(int i = 0; i<5;i++){
-            TrainerObject trainerObject = new TrainerObject(i,"hluuu"+ i,"355","This the discription","logo.jpg");
 
             localDataSet.add(trainerObject);
+            trainerProfileSet.add(trainerObject);
 
         }
 
 
-
-
+        trainerProfileAdapter  = new TrainerProfileAdapter(trainerProfileSet,getContext(),HomeFragment.this); // Create an instance of your adapter
+        binding.allTrainersRecyclerView.setAdapter(trainerProfileAdapter);
 
 
         trainerAdapter  = new TrainerAdapter(localDataSet,getContext(),HomeFragment.this); // Create an instance of your adapter
-
         binding.browseTrainerRecycler.setAdapter(trainerAdapter);
 //        recyclerView.setAdapter(adapter);
 //        final TextView textView = binding.textHome;
@@ -61,8 +95,20 @@ public class HomeFragment extends Fragment implements IRecyclerViewClickHandler{
 
 
 
+
         return root;
     }
+
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        // Access the Toolbar from MainActivity
+
+    }
+
+
 
     @Override
     public void onDestroyView() {
@@ -71,9 +117,24 @@ public class HomeFragment extends Fragment implements IRecyclerViewClickHandler{
     }
 
 
+
+
     @Override
     public void onItemClick(int position) {
+        Log.d("CLICKED BUTTON", "btn clicked");
 
-        Log.d("CLICKED BUTTON", "onItemClick: ");
+
+        Bundle bundle = new Bundle();
+       TrainerObject trainer = new TrainerObject();
+       trainer= localDataSet.get(position);
+       bundle.putSerializable("clickedTrainSlot",trainer);
+        NavHostFragment.findNavController(HomeFragment.this)
+                .navigate(R.id.action_navigation_home_to_navigation_dashboard,bundle);
+
+    }
+
+    @Override
+    public void onProfileClick(int position) {
+        Log.d("CLICKED profile", "onItemClick: ");
     }
 }

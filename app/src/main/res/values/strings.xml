@@ -26,6 +26,10 @@
     <string name="title_profile">Profile</string>
     <string name="title_dashboard">Booking</string>
     <string name="title_notifications">Notifications</string>
+    <string name="sdk">sdk.dir=/Users/dalearnermacm1/Library/Android/sdk</string>
+    <string name="sdk_android">sdk.dir=C\:\\Users\\Hlulani\\AppData\\Local\\Android\\Sdk</string>
+
+
 
     <string name="lorem_ipsum">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris

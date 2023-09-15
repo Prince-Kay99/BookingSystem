@@ -12,6 +12,9 @@ public class UserObject {
     private String user_Password;
     private String user_Type;
 
+    private static UserObject userInstance;
+
+
 
     public UserObject(){};
 
@@ -80,4 +83,13 @@ public class UserObject {
     public void setUser_Type(String user_Type) {
         this.user_Type = user_Type;
     }
+
+    public static UserObject getInstance() {
+        if (userInstance == null) {
+            userInstance = new UserObject();
+        }
+        return userInstance;
+    }
+
+
 }
