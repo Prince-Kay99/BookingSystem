@@ -45,7 +45,7 @@ public class DashboardFragment extends Fragment {
              trainerObject = (TrainerObject) args.getSerializable("clickedTrainSlot");
              bookingObject.setTrainerObject(trainerObject);
              UserObject user = UserObject.getInstance();
-            Log.d("mnmn", "onCreateView: "+ user.getUser_Email());
+            Log.d("mnmnm", "onCreateView: "+ user.getUser_Email());
              bookingObject.setClientObject(user);
 
              binding.txtBookName2.setText(trainerObject.getName());
