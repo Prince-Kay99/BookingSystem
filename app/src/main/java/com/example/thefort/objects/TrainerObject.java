@@ -4,23 +4,28 @@ import java.io.Serializable;
 
 public class TrainerObject implements Serializable {
     private int ID;
+    private int trainer_id;
     private String Name;
     private String Price;
-    private String Description;
+    private String Duration;
+    private String Date;
+    private String Time;
     private String image;
 
 
     public TrainerObject() {
     }
 
-    public TrainerObject(int ID, String name, String price, String description, String image) {
+    public TrainerObject(int ID, int trainer_id, String name, String price, String duration, String date, String time, String image) {
         this.ID = ID;
+        this.trainer_id = trainer_id;
         Name = name;
         Price = price;
-        Description = description;
+        Duration = duration;
+        Date = date;
+        Time = time;
         this.image = image;
     }
-
 
     public int getID() {
         return ID;
@@ -28,6 +33,14 @@ public class TrainerObject implements Serializable {
 
     public void setID(int ID) {
         this.ID = ID;
+    }
+
+    public int getTrainer_id() {
+        return trainer_id;
+    }
+
+    public void setTrainer_id(int trainer_id) {
+        this.trainer_id = trainer_id;
     }
 
     public String getName() {
@@ -46,12 +59,28 @@ public class TrainerObject implements Serializable {
         Price = price;
     }
 
-    public String getDescription() {
-        return Description;
+    public String getDuration() {
+        return Duration;
     }
 
-    public void setDescription(String description) {
-        Description = description;
+    public void setDuration(String duration) {
+        Duration = duration;
+    }
+
+    public String getDate() {
+        return Date;
+    }
+
+    public void setDate(String date) {
+        Date = date;
+    }
+
+    public String getTime() {
+        return Time;
+    }
+
+    public void setTime(String time) {
+        Time = time;
     }
 
     public String getImage() {

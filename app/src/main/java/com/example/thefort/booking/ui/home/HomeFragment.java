@@ -73,7 +73,7 @@ public class HomeFragment extends Fragment implements IRecyclerViewClickHandler{
 
 //        ArrayList<TrainerObject> localDataSet = new ArrayList<>();
 //        ArrayList<TrainerObject> trainerProfileSet = new ArrayList<>();
-        TrainerObject trainerObject = new TrainerObject(1,"hluuu","355","This the discription","logo.jpg");
+        TrainerObject trainerObject = new TrainerObject(1,"hluuu","355","60","20 Nov","16:00","logo.jpg");
 
         for(int i = 0; i<5;i++){
 

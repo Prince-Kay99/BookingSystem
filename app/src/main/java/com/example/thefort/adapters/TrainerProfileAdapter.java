@@ -95,9 +95,9 @@ public class TrainerProfileAdapter  extends RecyclerView.Adapter<TrainerProfileA
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
 
-        TrainerObject trainerObject = new TrainerObject(1,"hlu","35","This the discription","logo.jpg");
-
-        localDataSet.add(trainerObject);
+//        TrainerObject trainerObject = new TrainerObject(1,"hlu","35","This the discription","logo.jpg");
+//
+//        localDataSet.add(trainerObject);
 
 
         String imageName = localDataSet.get(position).getImage();
@@ -105,7 +105,6 @@ public class TrainerProfileAdapter  extends RecyclerView.Adapter<TrainerProfileA
         int drawableId = mContext.getResources().getIdentifier(result, "drawable", mContext.getPackageName());
         viewHolder.getImageTrainer().setImageResource(drawableId);
         viewHolder.getTextName().setText( localDataSet.get(position).getName());
-
     }
 
 

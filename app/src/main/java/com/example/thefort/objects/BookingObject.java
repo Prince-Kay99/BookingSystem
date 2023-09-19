@@ -5,18 +5,15 @@ public class BookingObject {
     private int ID;
     private UserObject clientObject;
     private TrainerObject trainerObject;
-    private String date;
-    private String sessionMinutes;
+
 
     public BookingObject() {
     }
 
-    public BookingObject(int ID, UserObject clientObject, TrainerObject trainerObject, String date, String sessionMinutes) {
+    public BookingObject(int ID, UserObject clientObject, TrainerObject trainerObject) {
         this.ID = ID;
         this.clientObject = clientObject;
         this.trainerObject = trainerObject;
-        this.date = date;
-        this.sessionMinutes = sessionMinutes;
     }
 
     public int getID() {
@@ -43,19 +40,4 @@ public class BookingObject {
         this.trainerObject = trainerObject;
     }
 
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    public String getSessionMinutes() {
-        return sessionMinutes;
-    }
-
-    public void setSessionMinutes(String sessionMinutes) {
-        this.sessionMinutes = sessionMinutes;
-    }
 }

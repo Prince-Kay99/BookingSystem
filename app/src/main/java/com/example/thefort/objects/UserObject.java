@@ -14,7 +14,9 @@ public class UserObject {
 
     private static UserObject userInstance;
 
-
+    public static void setUserInstance(UserObject userInstance) {
+        UserObject.userInstance = userInstance;
+    }
 
     public UserObject(){};
 

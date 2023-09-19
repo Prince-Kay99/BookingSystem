@@ -1,7 +1,6 @@
 package com.example.thefort.adapters;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,7 +58,7 @@ public class TrainerAdapter  extends RecyclerView.Adapter<TrainerAdapter.ViewHol
             imgTrainer = (ImageView) view.findViewById(R.id.imgTrainer);
             txtName = (TextView) view.findViewById(R.id.txtName);
             txtPrice = (TextView) view.findViewById(R.id.txtPrice);
-            txtSummary = (TextView) view.findViewById(R.id.txtDescription);
+            txtSummary = (TextView) view.findViewById(R.id.txtDateTime);
             txtBookNow = (TextView) view.findViewById(R.id.txtBookNow);
 
 
@@ -111,22 +110,22 @@ public class TrainerAdapter  extends RecyclerView.Adapter<TrainerAdapter.ViewHol
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
 
-        TrainerObject trainerObject = new TrainerObject(1,"hlu","35","This the discription","logo.jpg");
+        //TrainerObject trainerObject = new TrainerObject(1,"hlu","35","This the discription","logo.jpg");
 
-        localDataSet.add(trainerObject);
-        localDataSet.add(trainerObject);
-        localDataSet.add(trainerObject);
-        localDataSet.add(trainerObject);
-        localDataSet.add(trainerObject);
-        localDataSet.add(trainerObject);
+//        localDataSet.add(trainerObject);
+//        localDataSet.add(trainerObject);
+//        localDataSet.add(trainerObject);
+//        localDataSet.add(trainerObject);
+//        localDataSet.add(trainerObject);
+//        localDataSet.add(trainerObject);
 
         String imageName = localDataSet.get(position).getImage();
         String result = imageName.substring(0, imageName.indexOf("."));
         int drawableId = mContext.getResources().getIdentifier(result, "drawable", mContext.getPackageName());
         viewHolder.getImageTrainer().setImageResource(drawableId);
         viewHolder.getTextName().setText( localDataSet.get(position).getName());
-        viewHolder.getTextPrice().setText("R" + localDataSet.get(position).getPrice());
-        viewHolder.getTextSummary().setText( localDataSet.get(position).getDescription());
+        viewHolder.getTextPrice().setText("R" + localDataSet.get(position).getPrice()+" for "+localDataSet.get(position).getDuration()+" mins");
+        viewHolder.getTextSummary().setText( localDataSet.get(position).getDate()+", "+localDataSet.get(position).getTime());
 
         viewHolder.getTextBookNow().setText("BOOK NOW");
     }

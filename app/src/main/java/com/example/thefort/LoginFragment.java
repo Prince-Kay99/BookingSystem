@@ -153,12 +153,8 @@ public class LoginFragment extends Fragment implements URLGenerator {
         editor.putString("pref_Id",String.valueOf(userObject.getId()));
         editor.putString("pref_UserType",userObject.getUser_Type());
         editor.commit();
+        UserObject.setUserInstance(userObject);
 
-        UserObject user = new UserObject();
-        user.setUser_Email(userObject.getUser_Email());
-        user.setUser_FirstName(userObject.getUser_FirstName());
-        user.setUser_LastName(userObject.getUser_LastName());
-        user.setUser_Password("passw");
     }
 
 
