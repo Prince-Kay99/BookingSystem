@@ -52,9 +52,9 @@ public class NotificationsFragment extends Fragment implements IRecyclerViewClic
 
         binding.recyclerViewSlots.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
 
-        SlotObject slotObject = new SlotObject(1,"8:01 AM","9:00 AM",2,"Pending");
 
         for(int i = 0; i<5;i++){
+            SlotObject slotObject = new SlotObject(i,"8:01 AM "+ i,"9:00 AM",i+2,"Pending "+i);
 
             localDataSet.add(slotObject);
           //  Log.d("Email in trainer", "onCreateView: "+localDataSet.get(i).getUserObject().getUser_Email());

@@ -163,22 +163,13 @@ tools:context=".booking.ui.dashboard.DashboardFragment">
             app:layout_constraintTop_toBottomOf="@+id/divider3" />
 
         <TextView
-            android:id="@+id/txtBookLocation"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="Location of the gym"
-            app:layout_constraintStart_toStartOf="@+id/textView15"
-            app:layout_constraintTop_toBottomOf="@+id/textView15" />
-
-        <TextView
             android:id="@+id/txtBookNumbers"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="10dp"
             android:text="071 235 4578"
             app:layout_constraintStart_toStartOf="@+id/textView15"
-            app:layout_constraintTop_toBottomOf="@+id/txtBookLocation" />
+            app:layout_constraintTop_toBottomOf="@+id/textView15" />
 
         <TextView
             android:id="@+id/txtBookMail"

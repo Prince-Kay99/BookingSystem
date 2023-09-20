@@ -67,7 +67,7 @@ public class DashboardFragment extends Fragment implements URLGenerator {
         Bundle args = getArguments();
         if (args != null) {
 
-             bookingObject = (BookingObject) args.getSerializable("clickedBookingSlot");
+            bookingObject = (BookingObject) args.getSerializable("clickedBookingSlot");
             Log.d("check time", "onCreateView: "+bookingObject.getClientObject().getUser_LastName());
 
 
@@ -76,6 +76,8 @@ public class DashboardFragment extends Fragment implements URLGenerator {
             binding.txtBookDate.setText(bookingObject.getDate());
             binding.txtBookTime.setText(bookingObject.getTime());
             binding.txtBookDuration.setText(bookingObject.getTrainerObject().getDuration()+" mins");
+            binding.txtBookNumbers.setText(bookingObject.getTrainerObject().getUserObject().getUser_Contact());
+            binding.txtBookMail.setText(bookingObject.getTrainerObject().getUserObject().getUser_Email());
 
 
         }
@@ -84,9 +86,7 @@ public class DashboardFragment extends Fragment implements URLGenerator {
         binding.txtBookTrainerName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 Bundle bundle = new Bundle();
-
                 bundle.putSerializable("clickedTrainSlot",bookingObject.getTrainerObject());
                 NavHostFragment.findNavController(DashboardFragment.this)
                         .navigate(R.id.action_navigation_dashboard_to_navigation_notifications,bundle);
