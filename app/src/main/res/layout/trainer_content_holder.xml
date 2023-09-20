@@ -68,7 +68,7 @@
                 android:id="@+id/txtDateTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Small summary about the trainer and"
+                android:text="Small summary "
                 android:textSize="12sp"
                 app:layout_constraintStart_toStartOf="@+id/txtPrice"
                 app:layout_constraintTop_toBottomOf="@+id/txtPrice" />

@@ -107,7 +107,7 @@ tools:context=".booking.ui.dashboard.DashboardFragment">
             app:layout_constraintTop_toBottomOf="@+id/divider2" />
 
         <TextView
-            android:id="@+id/txtBookName2"
+            android:id="@+id/txtBookTrainerName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
@@ -127,7 +127,7 @@ tools:context=".booking.ui.dashboard.DashboardFragment">
             android:textColor="@color/material_dynamic_neutral_variant60"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/imageView5"
-            app:layout_constraintStart_toStartOf="@+id/txtBookName2" />
+            app:layout_constraintStart_toStartOf="@+id/txtBookTrainerName" />
 
         <ImageView
             android:id="@+id/imageView6"

@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
@@ -28,6 +29,7 @@ import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.StringRequest;
 import com.example.thefort.R;
 import com.example.thefort.booking.MainAppActivity;
+import com.example.thefort.booking.ui.home.HomeFragment;
 import com.example.thefort.databinding.FragmentDashboardBinding;
 import com.example.thefort.network.URLGenerator;
 import com.example.thefort.network.VolleyCallBack;
@@ -47,7 +49,6 @@ import java.io.UnsupportedEncodingException;
 public class DashboardFragment extends Fragment implements URLGenerator {
 
     private FragmentDashboardBinding binding;
-    private TrainerObject trainerObject;
     private BookingObject bookingObject;
     RequestQueue requestQueue;
     String serverResponseCode;
@@ -65,28 +66,39 @@ public class DashboardFragment extends Fragment implements URLGenerator {
 
         Bundle args = getArguments();
         if (args != null) {
-             trainerObject = (TrainerObject) args.getSerializable("clickedTrainSlot");
-             bookingObject.setTrainerObject(trainerObject);
-             UserObject user = UserObject.getInstance();
-             bookingObject.setClientObject(user);
-             binding.txtBookName2.setText(trainerObject.getName());
-            binding.txtBookPrice.setText("R "+trainerObject.getPrice());
-            binding.txtBookDate.setText(trainerObject.getDate());
-            binding.txtBookTime.setText(trainerObject.getTime());
-            binding.txtBookDuration.setText(trainerObject.getDuration()+" mins");
+
+             bookingObject = (BookingObject) args.getSerializable("clickedBookingSlot");
+            Log.d("check time", "onCreateView: "+bookingObject.getClientObject().getUser_LastName());
+
+
+            binding.txtBookTrainerName.setText(bookingObject.getTrainerObject().getUserObject().getUser_FirstName());
+            binding.txtBookPrice.setText("R"+bookingObject.getTrainerObject().getPrice());
+            binding.txtBookDate.setText(bookingObject.getDate());
+            binding.txtBookTime.setText(bookingObject.getTime());
+            binding.txtBookDuration.setText(bookingObject.getTrainerObject().getDuration()+" mins");
 
 
         }
 
 
+        binding.txtBookTrainerName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Bundle bundle = new Bundle();
+
+                bundle.putSerializable("clickedTrainSlot",bookingObject.getTrainerObject());
+                NavHostFragment.findNavController(DashboardFragment.this)
+                        .navigate(R.id.action_navigation_dashboard_to_navigation_notifications,bundle);
+
+            }
+        });
+
         binding.btnBookReserve.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-
                 requestQueue = VolleySingleton.getVolleyInstance(getContext()).getRequestQueue();
-
-
 
                 try {
                     POSTMakeBookingRequest(new VolleyCallBack() {
@@ -98,7 +110,6 @@ public class DashboardFragment extends Fragment implements URLGenerator {
                                 if (serverResponseCode.equals("200")) {
                                     Log.e("RESPONSE CODE 200: ", serverResponseCode);
                                     Intent intent = new Intent(getActivity(), MainAppActivity.class);
-                                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                     startActivity(intent);
                                     requireActivity().finish();
                                 } else if (serverResponseCode.equals("202")) {

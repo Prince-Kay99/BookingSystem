@@ -110,22 +110,15 @@ public class TrainerAdapter  extends RecyclerView.Adapter<TrainerAdapter.ViewHol
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
 
-        //TrainerObject trainerObject = new TrainerObject(1,"hlu","35","This the discription","logo.jpg");
 
-//        localDataSet.add(trainerObject);
-//        localDataSet.add(trainerObject);
-//        localDataSet.add(trainerObject);
-//        localDataSet.add(trainerObject);
-//        localDataSet.add(trainerObject);
-//        localDataSet.add(trainerObject);
 
-        String imageName = localDataSet.get(position).getImage();
-        String result = imageName.substring(0, imageName.indexOf("."));
-        int drawableId = mContext.getResources().getIdentifier(result, "drawable", mContext.getPackageName());
-        viewHolder.getImageTrainer().setImageResource(drawableId);
-        viewHolder.getTextName().setText( localDataSet.get(position).getName());
+        //String imageName = localDataSet.get(position).getImage();
+        //String result = imageName.substring(0, imageName.indexOf("."));
+       // int drawableId = mContext.getResources().getIdentifier(result, "drawable", mContext.getPackageName());
+       // viewHolder.getImageTrainer().setImageResource(drawableId);
+        viewHolder.getTextName().setText( localDataSet.get(position).getUserObject().getUser_FirstName());
         viewHolder.getTextPrice().setText("R" + localDataSet.get(position).getPrice()+" for "+localDataSet.get(position).getDuration()+" mins");
-        viewHolder.getTextSummary().setText( localDataSet.get(position).getDate()+", "+localDataSet.get(position).getTime());
+      //  viewHolder.getTextSummary().setText( localDataSet.get(position).getDate()+", "+localDataSet.get(position).getTime());
 
         viewHolder.getTextBookNow().setText("BOOK NOW");
     }

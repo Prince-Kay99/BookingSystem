@@ -1,6 +1,8 @@
 package com.example.thefort.objects;
 
-public class BookingObject {
+import java.io.Serializable;
+
+public class BookingObject implements Serializable {
 
     private int ID;
     private UserObject clientObject;

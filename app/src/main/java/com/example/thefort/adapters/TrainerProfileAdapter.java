@@ -100,11 +100,11 @@ public class TrainerProfileAdapter  extends RecyclerView.Adapter<TrainerProfileA
 //        localDataSet.add(trainerObject);
 
 
-        String imageName = localDataSet.get(position).getImage();
-        String result = imageName.substring(0, imageName.indexOf("."));
-        int drawableId = mContext.getResources().getIdentifier(result, "drawable", mContext.getPackageName());
-        viewHolder.getImageTrainer().setImageResource(drawableId);
-        viewHolder.getTextName().setText( localDataSet.get(position).getName());
+      //  String imageName = localDataSet.get(position).getImage();
+      //  String result = imageName.substring(0, imageName.indexOf("."));
+        //int drawableId = mContext.getResources().getIdentifier(result, "drawable", mContext.getPackageName());
+        //viewHolder.getImageTrainer().setImageResource(drawableId);
+        viewHolder.getTextName().setText( localDataSet.get(position).getUserObject().getUser_FirstName());
     }
 
 
