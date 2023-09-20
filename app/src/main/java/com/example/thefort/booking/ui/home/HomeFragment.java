@@ -26,6 +26,7 @@ import com.example.thefort.adapters.TrainerProfileAdapter;
 import com.example.thefort.booking.MainAppActivity;
 import com.example.thefort.databinding.FragmentHomeBinding;
 import com.example.thefort.objects.TrainerObject;
+import com.example.thefort.objects.UserObject;
 import com.example.thefort.ui.IRecyclerViewClickHandler;
 import com.google.android.material.appbar.MaterialToolbar;
 
@@ -73,12 +74,14 @@ public class HomeFragment extends Fragment implements IRecyclerViewClickHandler{
 
 //        ArrayList<TrainerObject> localDataSet = new ArrayList<>();
 //        ArrayList<TrainerObject> trainerProfileSet = new ArrayList<>();
-        TrainerObject trainerObject = new TrainerObject(1,"hluuu","355","60","20 Nov","16:00","logo.jpg");
+        TrainerObject trainerObject = new TrainerObject(1,13,"Branch 1","BSc Sport Management",
+                "Serious","5 Years","5", UserObject.getInstance(),"R150","3 hrs");
 
         for(int i = 0; i<5;i++){
 
             localDataSet.add(trainerObject);
             trainerProfileSet.add(trainerObject);
+            Log.d("Email in trainer", "onCreateView: "+localDataSet.get(i).getUserObject().getUser_Email());
 
         }
 
@@ -122,7 +125,6 @@ public class HomeFragment extends Fragment implements IRecyclerViewClickHandler{
     @Override
     public void onItemClick(int position) {
         Log.d("CLICKED BUTTON", "btn clicked");
-
 
         Bundle bundle = new Bundle();
        TrainerObject trainer = new TrainerObject();

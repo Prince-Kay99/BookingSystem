@@ -3,52 +3,96 @@ package com.example.thefort.objects;
 import java.io.Serializable;
 
 public class TrainerObject implements Serializable {
-    private int ID;
-    private int trainer_id;
-    private String Name;
+    private int Id;
+    private int Age;
+    private String Branch;
+    private String Qualification;
+    private String Personality;
+    private String Experience;
+    private String Rating;
+    private UserObject userObject;
     private String Price;
     private String Duration;
-    private String Date;
-    private String Time;
-    private String image;
 
 
     public TrainerObject() {
     }
 
-    public TrainerObject(int ID, int trainer_id, String name, String price, String duration, String date, String time, String image) {
-        this.ID = ID;
-        this.trainer_id = trainer_id;
-        Name = name;
+    public TrainerObject(int id, int age, String branch, String qualification, String personality, String experience, String rating, UserObject userObject, String price, String duration) {
+        Id = id;
+        Age = age;
+        Branch = branch;
+        Qualification = qualification;
+        Personality = personality;
+        Experience = experience;
+        Rating = rating;
+        this.userObject = userObject;
         Price = price;
         Duration = duration;
-        Date = date;
-        Time = time;
-        this.image = image;
     }
 
-    public int getID() {
-        return ID;
+    public int getId() {
+        return Id;
     }
 
-    public void setID(int ID) {
-        this.ID = ID;
+    public void setId(int id) {
+        Id = id;
     }
 
-    public int getTrainer_id() {
-        return trainer_id;
+    public int getAge() {
+        return Age;
     }
 
-    public void setTrainer_id(int trainer_id) {
-        this.trainer_id = trainer_id;
+    public void setAge(int age) {
+        Age = age;
     }
 
-    public String getName() {
-        return Name;
+    public String getBranch() {
+        return Branch;
     }
 
-    public void setName(String name) {
-        Name = name;
+    public void setBranch(String branch) {
+        Branch = branch;
+    }
+
+    public String getQualification() {
+        return Qualification;
+    }
+
+    public void setQualification(String qualification) {
+        Qualification = qualification;
+    }
+
+    public String getPersonality() {
+        return Personality;
+    }
+
+    public void setPersonality(String personality) {
+        Personality = personality;
+    }
+
+    public String getExperience() {
+        return Experience;
+    }
+
+    public void setExperience(String experience) {
+        Experience = experience;
+    }
+
+    public String getRating() {
+        return Rating;
+    }
+
+    public void setRating(String rating) {
+        Rating = rating;
+    }
+
+    public UserObject getUserObject() {
+        return userObject;
+    }
+
+    public void setUserObject(UserObject userObject) {
+        this.userObject = userObject;
     }
 
     public String getPrice() {
@@ -65,29 +109,5 @@ public class TrainerObject implements Serializable {
 
     public void setDuration(String duration) {
         Duration = duration;
-    }
-
-    public String getDate() {
-        return Date;
-    }
-
-    public void setDate(String date) {
-        Date = date;
-    }
-
-    public String getTime() {
-        return Time;
-    }
-
-    public void setTime(String time) {
-        Time = time;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
     }
 }
