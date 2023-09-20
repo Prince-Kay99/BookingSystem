@@ -108,8 +108,8 @@ namespace ThefortprivateGymWebApi.Controllers
             return NoContent();
         }
 
-        [HttpPost("register")]
-        public async Task<IActionResult> Register(User model)
+        [HttpPost("bookSession")]
+        public async Task<IActionResult> BookSession(Bookings model)
         {
             // Validate the model
             if (!ModelState.IsValid)
@@ -117,25 +117,22 @@ namespace ThefortprivateGymWebApi.Controllers
                 return BadRequest(ModelState);
             }
 
-            // Check if the user already exists
-            if (await _context.Users.AnyAsync(u => u.User_Email == model.User_Email))
+            // Check if the booking already exists
+            if (await _context.Users.AnyAsync(u => u.id == model.Id))
             {
-                return BadRequest("Username is already taken.");
+                return BadRequest("Session already exist.");
             }
 
-            // Create a new user (you should hash the password before storing)
-            var newUser = new User
+            // Create a new booking
+            var newBooking = new Bookings
             {
-                User_FirstName = model.User_FirstName,
-                User_LastName = model.User_LastName,
-                User_Contact = model.User_Contact,
-                User_Email = model.User_Email,
-                // Hash and salt the password before saving
-                User_Password = Secrecy.HashPassword(model.User_Password),
-                User_Type = "Client"
+                date = model.date,
+                Time = model.Time,
+                clientObject = model.clientObject,
+                trainerObject = model.trainerObject
                 // Include other user properties as needed
             };
-            _context.Users.Add(newUser);
+            _context.BookingSessions.Add(newBooking);
             await _context.SaveChangesAsync();
 
             return Ok("Registration successful.");

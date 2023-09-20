@@ -26,6 +26,7 @@ namespace ThefortprivateGymWebApi.Data
         public DbSet<CoachAvailability> CoachAvailabilitys { get; set; }
         public DbSet<CoachObject> CoachObject { get; set; } 
         public DbSet<CoachesSession> CoachesSessions { get; set; }
+        public DbSet<Bookings> BookingSessions { get; set; }
         
 
 
