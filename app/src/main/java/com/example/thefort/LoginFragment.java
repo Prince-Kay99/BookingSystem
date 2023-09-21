@@ -13,11 +13,15 @@ import android.view.WindowManager;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.example.thefort.booking.MainAppActivity;
@@ -30,7 +34,10 @@ import com.example.thefort.ui.UIComponents;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.UnsupportedEncodingException;
 
 
 public class LoginFragment extends Fragment implements URLGenerator {
@@ -41,6 +48,7 @@ public class LoginFragment extends Fragment implements URLGenerator {
     UIComponents uiComponents;
     String serverResponseCode;
     UserObject userObject;
+    UserObject user;
     SharedPreferences userSharedPreferences;
 
 
@@ -78,17 +86,15 @@ public class LoginFragment extends Fragment implements URLGenerator {
             @Override
             public void onClick(View view) {
 
-                Intent intent = new Intent(getActivity(), MainAppActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
-                requireActivity().finish();
+
 
                     requestQueue = VolleySingleton.getVolleyInstance(getContext()).getRequestQueue();
                     binding.txtEmail.setErrorEnabled(false);
                     binding.txtPassword.setErrorEnabled(false);
 
 
-                    GETLoginRequest(new VolleyCallBack() {
+                try {
+                    POSTLoginRequest(new VolleyCallBack() {
                         @Override
                         public void OnSuccess() {
 
@@ -116,11 +122,12 @@ public class LoginFragment extends Fragment implements URLGenerator {
 
                         }
                     });
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
+                }
 
 
-
-
-            //    NavHostFragment.findNavController(LoginFragment.this)
+                //    NavHostFragment.findNavController(LoginFragment.this)
               //          .navigate(R.id.action_FirstFragment_to_SecondFragment);
             }
         });
@@ -138,68 +145,101 @@ public class LoginFragment extends Fragment implements URLGenerator {
         SharedPreferences userSharedPreferences = requireContext().getSharedPreferences("userPref", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = userSharedPreferences.edit();
         editor.clear().apply();
-        editor.putString("pref_FirstName",userObject.getName());
-        editor.putString("pref_LastName",userObject.getSurname());
-        editor.putString("pref_Gender",userObject.getGender());
-        editor.putString("pref_Email",userObject.getEmail());
-        editor.putString("pref_Phone", String.valueOf(userObject.getPhoneNo()));
+
+        editor.putString("pref_FirstName",userObject.getUser_FirstName());
+        editor.putString("pref_LastName",userObject.getUser_LastName());
+        editor.putString("pref_Email",userObject.getUser_Email());
+        editor.putString("pref_Phone", userObject.getUser_Contact());
         editor.putString("pref_Id",String.valueOf(userObject.getId()));
-        editor.putString("pref_UserType",userObject.getUserType());
+        editor.putString("pref_UserType",userObject.getUser_Type());
         editor.commit();
+        UserObject.setUserInstance(userObject);
+
     }
 
 
     @Override
     public String generateURL() {
         String cleanUrl = getResources().getString(R.string.WCF_URL);
-        return cleanUrl + "LoginURI/" + binding.txtEmailEditor.getText() + "/" + binding.txtPasswordEditor.getText();
+        return cleanUrl + "/api/Users/Login/login";
     }
 
 
-    public void GETLoginRequest(final VolleyCallBack callBack) {
 
-        //JSONObject Request initialized
-
-        JsonObjectRequest JsonObjectRequest = new JsonObjectRequest(Request.Method.GET, generateURL(), null,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-
-                        String jsonObj = response.toString();
-
-                        if(!jsonObj.contains("def")){
-                            Log.e("Contains def obj",jsonObj.toString());
-                            if (jsonObj.contains("Id")) {
-                                GsonBuilder builder = new GsonBuilder();
-                                builder.serializeNulls();
-                                Gson gson = builder.setPrettyPrinting().create();
-                                userObject = gson.fromJson(jsonObj, UserObject.class);
-                                serverResponseCode = getResources().getString(R.string.response_success);
-                            }else{
-                                serverResponseCode =getResources().getString(R.string.response_login_error);
-                            }
-                        }else{
-                            serverResponseCode = getResources().getString(R.string.response_object_not_found);
-                        }
+    public void POSTLoginRequest(final VolleyCallBack callBack) throws JSONException {
 
 
-                        callBack.OnSuccess();
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        String body = "";
-                        serverResponseCode = null;
-                        Log.e("Error response",error.toString());
+        JSONObject jsonBody = new JSONObject();
 
-                        callBack.OnSuccess();
-                    }
+        jsonBody.put("username", binding.txtEmailEditor.getText());
+        jsonBody.put("password", binding.txtPasswordEditor.getText());
+
+        final String mRequestBody = jsonBody.toString();
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, generateURL(), new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                String jsonObj = response.toString();
+
+                Log.e("VOLLEYRESPONSE", "onResponse: "+response);
+
+                if (jsonObj.contains("id") && jsonObj.contains("user_FirstName") ) {
+                    GsonBuilder builder = new GsonBuilder();
+                    builder.serializeNulls();
+                    Gson gson = builder.setPrettyPrinting().create();
+                    userObject = gson.fromJson(jsonObj, UserObject.class);
+                    Log.e("VOLLEYLOGGED", "logged user "+userObject.getUser_Email());
+
+                    serverResponseCode = getResources().getString(R.string.response_success);
+                }else if(jsonObj.contains("0")){
+                    serverResponseCode="201";
+                }else if(jsonObj.contains("-1")){
+                    serverResponseCode="202";
+                }else {
+                    serverResponseCode = getResources().getString(R.string.response_login_error);
+                    Log.e("Inside response", "returned null object from server login");
                 }
-        );
-        JsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(3000, 3, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
 
-        requestQueue.add(JsonObjectRequest);
+                callBack.OnSuccess();
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.e("Error: ", error.getMessage());
+                Log.e("Succes response",error.toString());
+                serverResponseCode = null;
+                callBack.OnSuccess();
+            }
+        }){
+            @Override
+            public String getBodyContentType() {
+                return "application/json; charset=utf-8";
+            }
+
+
+            @Override
+            public byte[] getBody() throws AuthFailureError {
+                try {
+                    return mRequestBody == null ? null : mRequestBody.getBytes("utf-8");
+                } catch (UnsupportedEncodingException uee) {
+                    VolleyLog.wtf("Unsupported Encoding while trying to get the bytes of %s using %s", mRequestBody, "utf-8");
+                    return null;
+                }
+            }
+
+
+        };
+
+
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(3000, 3, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        requestQueue.add(stringRequest);
     }
+
+
 
 }
+
+
+

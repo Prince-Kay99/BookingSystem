@@ -7,22 +7,20 @@
 
     <fragment
         android:id="@+id/LoginFragment"
-        android:name="com.example.thefort.FirstFragment"
-        android:label="@string/first_fragment_label"
+        android:name="com.example.thefort.LoginFragment"
+        android:label="Login fragment"
         tools:layout="@layout/fragment_login">
-
         <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
+            android:id="@+id/action_LoginFragment_to_RegisterFragment"
             app:destination="@id/RegisterFragment" />
     </fragment>
     <fragment
         android:id="@+id/RegisterFragment"
         android:name="com.example.thefort.RegisterFragment"
-        android:label="@string/second_fragment_label"
+        android:label="Register fragment"
         tools:layout="@layout/fragment_register">
-
         <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
+            android:id="@+id/action_RegisterFragment_to_LoginFragment"
             app:destination="@id/LoginFragment" />
     </fragment>
 </navigation>

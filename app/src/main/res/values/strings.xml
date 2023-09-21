@@ -2,11 +2,10 @@
     <string name="app_name">TheFort</string>
     <string name="action_settings">Settings</string>
     <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
+
     <string name="next">Next</string>
     <string name="previous">Previous</string>
-    <string name="WCF_URL">BaseURL</string>
+    <string name="WCF_URL">https://fortapplication.azurewebsites.net</string>
 
     <!-- Server response status code-->
     <string name="response_success">200</string>
@@ -25,8 +24,12 @@
     <string name="menu_slideshow">Slideshow</string>
     <string name="title_home">Home</string>
     <string name="title_profile">Profile</string>
-    <string name="title_dashboard">Dashboard</string>
+    <string name="title_dashboard">Booking</string>
     <string name="title_notifications">Notifications</string>
+    <string name="sdk">sdk.dir=/Users/dalearnermacm1/Library/Android/sdk</string>
+    <string name="sdk_android">sdk.dir=C\:\\Users\\Hlulani\\AppData\\Local\\Android\\Sdk</string>
+
+
 
     <string name="lorem_ipsum">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris

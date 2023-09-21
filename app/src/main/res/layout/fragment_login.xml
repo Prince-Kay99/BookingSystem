@@ -33,7 +33,9 @@
             android:layout_height="match_parent"
             android:imeOptions="actionNext"
             android:inputType="textEmailAddress"
-            android:maxLines="1" />
+            android:maxLines="1"
+            android:text="Hlulani@gmail.com"
+            tools:text="Hlulani@gmail.com" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -63,7 +65,9 @@
             android:layout_height="match_parent"
             android:imeOptions="actionNext"
             android:inputType="textPassword"
-            android:maxLines="1" />
+            android:maxLines="1"
+            android:text="Hlulani@12"
+            tools:text="Hlulani@12" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
