@@ -54,7 +54,7 @@ public class NotificationsFragment extends Fragment implements IRecyclerViewClic
 
 
         for(int i = 0; i<5;i++){
-            SlotObject slotObject = new SlotObject(i,"8:01 AM "+ i,"9:00 AM",i+2,"Pending "+i);
+            SlotObject slotObject = new SlotObject(i,"8:01 AM "+ i,"9:00 AM",i+2,1,"Pending "+i);
 
             localDataSet.add(slotObject);
           //  Log.d("Email in trainer", "onCreateView: "+localDataSet.get(i).getUserObject().getUser_Email());

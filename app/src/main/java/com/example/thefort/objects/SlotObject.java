@@ -7,16 +7,18 @@ public class SlotObject implements Serializable {
     private String startTime;
     private String endTime;
     private int coachId;
+    private int userId;
     private String booked;
 
     public SlotObject() {
     }
 
-    public SlotObject(int id, String startTime, String endTime, int coachId, String booked) {
+    public SlotObject(int id, String startTime, String endTime, int coachId, int userId, String booked) {
         Id = id;
         this.startTime = startTime;
         this.endTime = endTime;
         this.coachId = coachId;
+        this.userId = userId;
         this.booked = booked;
     }
 
@@ -50,6 +52,14 @@ public class SlotObject implements Serializable {
 
     public void setCoachId(int coachId) {
         this.coachId = coachId;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public String getBooked() {

@@ -48,7 +48,7 @@ public class LoginFragment extends Fragment implements URLGenerator {
     UIComponents uiComponents;
     String serverResponseCode;
     UserObject userObject;
-    UserObject user;
+
     SharedPreferences userSharedPreferences;
 
 

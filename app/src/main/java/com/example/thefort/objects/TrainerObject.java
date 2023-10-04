@@ -12,10 +12,44 @@ public class TrainerObject implements Serializable {
     private String Rating;
     private UserObject userObject;
     private String Price;
+
+    public String getName() {
+        return Name;
+    }
+
+    public void setName(String name) {
+        Name = name;
+    }
+
+    public String getSurname() {
+        return Surname;
+    }
+
+    public void setSurname(String surname) {
+        Surname = surname;
+    }
+
+    private String Name;
+    private String Surname;
     private String Duration;
 
 
     public TrainerObject() {
+    }
+
+
+    public TrainerObject(int id,int age, String branch, String qualification, String personality, String experience, String rating, String price, String name, String surname, String duration) {
+       Id=id;
+        Age = age;
+        Branch = branch;
+        Qualification = qualification;
+        Personality = personality;
+        Experience = experience;
+        Rating = rating;
+        Price = price;
+        Name = name;
+        Surname = surname;
+        Duration = duration;
     }
 
     public TrainerObject(int id, int age, String branch, String qualification, String personality, String experience, String rating, UserObject userObject, String price, String duration) {
